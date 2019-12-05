@@ -58,7 +58,80 @@ def Dijkstra(graph, s):
   return dist[]
 ```
 
-### Application
+### Applications
 
+1. Used in finding Shortest path
+
+2. Used for geographical Maps
+
+  * Distance between locations refers to edges, distance = distances
+
+  * Locations refers to vertices on the graph.
+
+3. Used in telephone networks
 
 ### Examples with Code
+1. Example 1: General Code
+
+``` python
+nodes = ('A', 'B', 'C', 'D', 'E', 'F', 'G')
+distance = {
+    'B': {'A': 5, 'D': 1, 'G': 2},
+    'A': {'B': 5, 'D': 3, 'E': 12, 'F' :5},
+    'D': {'B': 1, 'G': 1, 'E': 1, 'A': 3},
+    'G': {'B': 2, 'D': 1, 'C': 2},
+    'C': {'G': 2, 'E': 1, 'F': 16},
+    'E': {'A': 12, 'D': 1, 'C': 1, 'F': 2},
+    'F': {'A': 5, 'E': 2, 'C': 16}}
+
+unvisited = {node: None for node in nodes} # None is being used for inf
+visited = {}
+current = 'F'
+currentDistance = 0
+unvisited[current] = currentDistance
+
+while True:
+  for neighbor, distance in distances[current].items():
+    if neighbor not in visited: continue
+    newDistance = currentDistance + distance
+    if unvisited[neighbor] is None or unvisited[neighbor] > newDistance:
+      unvisited[neighbor] = newDistance
+  visited[current] =  currentDistance
+  del unvisited[current]
+  if not unvisited: break
+  candidates = [node for node in unvisited.items() if node[1]]
+  current, currentDistance = sorted(candidates, key =  lambda x: x[1])[0]
+print(visited)
+```
+
+2. Example 2: Traveling Home
+``` python
+def Travel(map, home):
+  home = 'Home'
+  map = {
+    'Walmart': {'Olin': 10, 'Connecticut': 85, 'Mall': 2, 'Babson': 14, 'Home': 12}
+    'Olin': {'Connecticut': 93, 'Mall': 10, 'Babson': 2, 'Home': 2, 'Walmart': 10}
+    'Connecticut': {'Mall': 88, 'Babson': 95, 'Home': 90, 'Walmart': 85, 'Olin': 93}
+    'Mall': {'Babson': 14, 'Home': 10, 'Walmart': 2, 'Olin': 10, 'Connecticut': 88}
+    'Babson': {'Walmart': 14, 'Olin': 2, 'Connecticut': 94, 'Mall': 14, 'Home': 4}
+    'Home': {'Walmart': 12, 'Olin': 2, 'Connecticut': 90, 'Mall': 10, 'Babson': 4}
+  }
+  leaving =  {node: None for node in nodes}
+  traveled = {}
+  started  = 0
+  leaving[home] = started
+
+  while True:
+    for location, map in mileage[home].items():
+      if location not in traveled:
+        continue
+      milesTraveled = started + map
+      if leaving[location] is None or leaving[location] > milesTraveled:
+        leaving[location] = milesTraveled
+      traveled[home] = started
+      del traveled[home]
+      if not leaving:
+        break
+      places = [node for node in leaving.items() if node[1]]
+      home, started = sorted(places, key =  lambda x: x[1])[0]
+    print(traveled)
