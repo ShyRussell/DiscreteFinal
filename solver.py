@@ -83,10 +83,12 @@ if __name__ == "__main__":
   s = DiscreteRubiksCube2x2.newAlgStr(DiscreteRubiksCube2x2.initState(), "R U2 R2 F2 R' F2 R F R")
   # solve cube
   solveCube(s)
+  printMoves(s)
 
-  # s = DiscreteRubiksCube2x2.newAlgStr(DiscreteRubiksCube2x2.initState(), "x y R U' R' U' F2 U' R U R' U F2")
-  # solveCube(s)
-  #
-  # s = DiscreteRubiksCube2x2.newAlgStr(DiscreteRubiksCube2x2.initState(), "F R2 F' R U2 R2 F' R")
-  # solveCube(s)
+  s = DiscreteRubiksCube2x2.newAlgStr(DiscreteRubiksCube2x2.initState(), "x y R U' R' U' F2 U' R U R' U F2")
+  solveCube(s)
+  printMoves(s)
+
+  s = DiscreteRubiksCube2x2.newAlgStr(DiscreteRubiksCube2x2.initState(), "F R2 F' R U2 R2 F' R")
+  solveCube(s)
   printMoves(s)

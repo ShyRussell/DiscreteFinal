@@ -135,3 +135,4 @@ def Travel(map, home):
       places = [node for node in leaving.items() if node[1]]
       home, started = sorted(places, key =  lambda x: x[1])[0]
     print(traveled)
+```
